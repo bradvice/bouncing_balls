@@ -1,51 +1,49 @@
-function move_ball(movement, ballid) {
-  bodyrect = document.body.getBoundingClientRect();
-  ball = document.getElementById(ballid);
-  ballrect = ball.getBoundingClientRect();
-  if (ballrect.left < bodyrect.left || ballrect.right > bodyrect.right) {
-    movement[0] = -movement[0];
+function move_balls(movements) {
+  const bodyrect = document.body.getBoundingClientRect();
+  const balls = document.getElementsByClassName("ball");
+  for (let i = 0; i < balls.length; i++) {
+    let ball = document.getElementById(balls[i].id);
+    let ballrect = ball.getBoundingClientRect();
+    if (ballrect.left < bodyrect.left || ballrect.right > bodyrect.right) {
+      movements[i][0] = -movements[i][0];
+    }
+    if (ballrect.top < bodyrect.top || ballrect.bottom > bodyrect.bottom) {
+      movements[i][1] = -movements[i][1];
+    }
+    ball.style.left = `${ballrect.left + movements[i][0]}px`;
+    ball.style.top = `${ballrect.top + movements[i][1]}px`;
   }
-  if (ballrect.top < bodyrect.top || ballrect.bottom > bodyrect.bottom) {
-    movement[1] = -movement[1];
-  }
-  ball.style.left = `${ballrect.left + movement[0]}px`;
-  ball.style.top = `${ballrect.top + movement[1]}px`;
-  setTimeout(move_ball, 2, movement, ballid);
+  setTimeout(move_balls, 5, movements);
 }
 
 function change_bg(colors) {
-  colors.unshift(colors.pop());
+  colorstring = "radial-gradient(";
+  for (let i = 0; i < colors.length; i++) {
+    colorstring += colors[i] + ", ";
+  }
   document.body.style.backgroundImage =
-    "linear-gradient(to right, " +
-    colors[0] +
-    ", " +
-    colors[1] +
-    ", " +
-    colors[2] +
-    ", " +
-    colors[3] +
-    ", " +
-    colors[4] +
-    ", " +
-    colors[5];
-  +")";
-  setTimeout(change_bg, 2000, colors);
+    colorstring.substr(0, colorstring.length - 2) + ")";
+  colors.unshift(colors.pop());
+  setTimeout(change_bg, 30, colors);
 }
 
 window.addEventListener("load", () => {
-  for (let i = 1; i < 51; i++) {
+  for (let i = 1; i < 37; i++) {
     const ball = document.createElement("div");
     ball.setAttribute("id", `ball${i}`);
     ball.setAttribute("class", "ball");
     document.body.appendChild(ball);
   }
-  const balls = document.getElementsByClassName("ball");
-  let count = 0;
-  for (let i = 0; i < 7; i++) {
-    for (let x = 0; x < 7; x++) {
-      count++;
-      move_ball([i - 3, x - 3], balls[count].id);
-      console.log(count);
+  const movements = [];
+  for (let i = 0; i < 6; i++) {
+    for (let x = 0; x < 6; x++) {
+      movements.push([(i - 2.5) * 1.5, (x - 2.5) * 1.5]);
     }
   }
+  move_balls(movements);
+  const colors = [];
+  for (let i = 0; i < 61; i++) {
+    colors.push(`hsl(${i * 6}, 100%, 50%)`);
+  }
+  change_bg(colors);
 });

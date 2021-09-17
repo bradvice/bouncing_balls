@@ -4,32 +4,6 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-image: radial-gradient(red, orange, yellow, green, blue, purple);
-  animation: colorwheel 20s infinite;
-}
-
-@keyframes colorwheel {
-  0% {
-    background-image: radial-gradient(red, orange, yellow, green, blue, purple);
-  }
-  16% {
-    background-image: radial-gradient(purple, red, orange, yellow, green, blue);
-  }
-  33% {
-    background-image: radial-gradient(blue, purple, red, orange, yellow, green);
-  }
-  50% {
-    background-image: radial-gradient(green, blue, purple, red, orange, yellow);
-  }
-  66% {
-    background-image: radial-gradient(yellow, green, blue, purple, red, orange);
-  }
-  83% {
-    background-image: radial-gradient(orange, yellow, green, blue, purple, red);
-  }
-  100% {
-    background-image: radial-gradient(red, orange, yellow, green, blue, purple);
-  }
 }
 
 .ball {
