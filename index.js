@@ -28,16 +28,16 @@ function change_bg(colors) {
 }
 
 window.addEventListener("load", () => {
-  for (let i = 1; i < 37; i++) {
+  for (let i = 1; i < 50; i++) {
     const ball = document.createElement("div");
     ball.setAttribute("id", `ball${i}`);
     ball.setAttribute("class", "ball");
     document.body.appendChild(ball);
   }
   const movements = [];
-  for (let i = 0; i < 6; i++) {
-    for (let x = 0; x < 6; x++) {
-      movements.push([(i - 2.5) * 1.5, (x - 2.5) * 1.5]);
+  for (let i = 0; i < 7; i++) {
+    for (let x = 0; x < 7; x++) {
+      movements.push([i - 3, x - 3]);
     }
   }
   move_balls(movements);
